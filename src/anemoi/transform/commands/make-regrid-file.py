@@ -60,7 +60,7 @@ def _path_to_lat_lon(path: str) -> tuple[np.ndarray, np.ndarray]:
         # assume anemoi-dataset first - read the arrays with zarr (xarray cannot open anemoi stores in format 3)
         try:
             return _anemoi_zarr_lat_lon(path)
-        except (KeyError, ImportError, OSError, ValueError):
+        except (KeyError, ValueError, FileNotFoundError, ImportError):
             pass
 
     # fallback to earthkit-data
