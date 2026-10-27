@@ -48,8 +48,9 @@ def _write_array(group, name, data):
 @pytest.mark.parametrize("zarr_format", ZARR_FORMATS)
 def test_path_to_lat_lon_anemoi_zarr(tmp_path, zarr_format):
     """The latitudes and longitudes of an anemoi dataset are read with zarr, whatever the zarr format."""
+    # no value equals the default fill value (0), which xarray would mask as NaN
     latitudes = np.linspace(-80.0, 80.0, 12)
-    longitudes = np.linspace(0.0, 330.0, 12)
+    longitudes = np.linspace(5.0, 335.0, 12)
     group = _open_group(tmp_path / "anemoi.zarr", zarr_format)
     _write_array(group, "latitudes", latitudes)
     _write_array(group, "longitudes", longitudes)
